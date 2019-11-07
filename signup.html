@@ -1,0 +1,158 @@
+<html>
+<head>
+	<title>Signup form with form validation</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+		.form-control {
+			width: 60%;
+		}
+	</style>
+</head>
+<body onload="document.signup.fname.focus();">
+	<div class="container">
+		<h1>SignUp</h1>
+		<form class="form-horizontal" action="#" method="POST" name="signup">
+			<div class="form-group">
+				<label class="control-label" for="fname">First Name:</label>
+				<input class="form-control" type="text" id="fname" name="fname" size="15" placeholder="Name">
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="lname">Last Name:</label>
+				<input class="form-control" type="text" id="lname" name="lname" size="15" placeholder="Surname">
+			</div>
+			<div class="form-group">
+				<label class="control-label" id="gender" for="gender">Sex:</label>
+				<input type= "radio" id="male" name="gender" value="Male"><span>Male</span>
+				<input type= "radio" id="female" name="gender" value="Female"><span>Female</span>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="emailid">Email Id:</label>
+				<input class="form-control" type="text" id="emailid" name="emailid" size="50" placeholder="abc@gmail.com">
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="password">Password:</label>
+				<input class="form-control" type="password" id="password" name="password" size="20" placeholder="password">
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="address">Address:</label>
+				<textarea class="form-control" name= "address" id="address" placeholder="Address"></textarea>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="country">Country:</label>
+				<select class="form-control" name="country" id="country">
+					<option selected="" value="Default">(Please select a country)</option>
+					<option value= "IND">India</option>
+					<option value= "NEP">Nepal</option>
+					<option value= "BNG">Bangladesh</option>
+					<option value= "SRI">SRI LANKA</option>
+				</select>
+			</div>
+			
+			<div class="form-group"> 
+	            <div class="col-sm-offset-2 col-sm-10">
+	              <button onClick="formValidation()" type="submit" class="btn btn-default"><a href="file:///F:/pdfs/5th%20sem/cse%20205/netflix_landing-page-master/index.html">Submit</a></button>
+	            </div>
+	        </div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+	function formValidation() {
+	var fnm= document.getElementById("fname");
+	var lnm= document.getElementById("lname");
+	var msex= document.getElementById("male");
+	var fsex= document.getElementById("female");
+	var email= document.getElementById("emailid");
+	var password= document.getElementById("password");
+	var add= document.getElementById("address");
+	var count= document.getElementById("country");
+	if(validateEmail(email))
+	{
+		if(password_validation(password,7,12))
+		{
+			if(allLetter(fnm))
+			{
+				if(countryselect(count))
+					{
+						if(validsex(msex,fsex)) {
+
+						}
+					}
+			}
+		}
+	}
+	return false;
+}
+function validateEmail(email) {
+	var mailformat=  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	if(email.value.match(mailformat)) {
+		return true;
+	}
+	else {
+		alert("You have entered an invalid email address!");
+		email.focus();
+		return false;
+	}
+}
+function password_validation(password,mx,my) {
+	var password_len= password.value.length;
+	if(password_len== 0 || password_len>= my || password_len< mx) {
+		alert("Password should not be empty / length be between "+mx+" to "+my);
+		password.focus();
+		return false;
+	}
+	return true;
+}
+function allLetter(fnm) {   
+	var letters = /^[A-Za-z]+$/;  
+	if(fnm.value.match(letters)) {  
+		return true;  
+	}  
+	else {  
+		alert("First name must have alphabet characters only");  
+		fnm.focus();  
+		return false;  
+	}  
+}  
+function alphanumeric(add) {   
+	var letters = /^[0-9a-zA-Z]+$/;  
+	if(add.value.match(letters)) {  
+		return true;  
+	}  
+	else {  
+		alert("User address must have alphanumeric characters only");  
+		add.focus();  
+		return false;  
+	}  
+}  
+function countryselect(count) {  
+	if(count.value == "Default") {  
+		alert("Select your country from the list");  
+		count.focus();  
+		return false;  
+	}  
+	else {  
+		return true;  
+	}  
+}
+function validsex(msex,fsex) {  
+	x=0;  
+  	if(msex.checked) {  
+		x++;  
+	}
+	if(fsex.checked) {  
+		x++;   
+	}  
+	if(x==0) {  
+		alert("Select Male/Female");  
+		msex.focus();  
+		return false;  
+	}  
+	else {  
+		alert("Form Successfully Submitted");  
+		window.location.reload()  
+		return true;
+	}  
+}  
+	</script>
+</html>
